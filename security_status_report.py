@@ -20,23 +20,43 @@ def security_check():
         # Проверяем .gitignore
         gitignore = Path('.gitignore')
         if gitignore.exists():
-            gitignore_content = gitignore.read_text()
-            if '.env' in gitignore_content:
-                print("✅ .env in .gitignore: YES")
-            else:
-                issues.append("❌ .env NOT in .gitignore")
+            try:
+                gitignore_content = gitignore.read_text(encoding='utf-8')
+                if '.env' in gitignore_content:
+                    print("✅ .env in .gitignore: YES")
+                else:
+                    issues.append("❌ .env NOT in .gitignore")
+            except UnicodeDecodeError:
+                # Пробуем другие кодировки
+                try:
+                    gitignore_content = gitignore.read_text(encoding='latin1')
+                    if '.env' in gitignore_content:
+                        print("✅ .env in .gitignore: YES")
+                    else:
+                        issues.append("❌ .env NOT in .gitignore")
+                except Exception as e:
+                    issues.append(f"❌ Cannot read .gitignore: {e}")
         else:
             issues.append("❌ .gitignore missing")
             
         # Читаем .env содержимое (безопасно)
         try:
-            env_content = env_file.read_text()
+            env_content = env_file.read_text(encoding='utf-8')
             if 'ваш_api_ключ' in env_content.lower():
                 issues.append("⚠️ Test API key in .env (replace with real)")
             else:
                 print("✅ .env contains real keys")
-        except:
-            issues.append("❌ Cannot read .env")
+        except UnicodeDecodeError:
+            try:
+                env_content = env_file.read_text(encoding='latin1')
+                if 'ваш_api_ключ' in env_content.lower():
+                    issues.append("⚠️ Test API key in .env (replace with real)")
+                else:
+                    print("✅ .env contains real keys")
+            except Exception as e:
+                issues.append(f"❌ Cannot read .env: {e}")
+        except Exception as e:
+            issues.append(f"❌ Cannot read .env: {e}")
             
     else:
         issues.append("❌ .env file NOT FOUND")
