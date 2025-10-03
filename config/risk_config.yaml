@@ -1,0 +1,77 @@
+# Risk Management Configuration
+# Жесткие лимиты (НЕ ИЗМЕНЯЕМЫЕ без тестирования)
+
+risk_limits:
+  # Основные лимиты риска
+  risk_per_trade: 0.01          # 1.0% капитала на сделку
+  max_daily_loss: 0.03         # 3.0% максимальный дневной убыток
+  max_weekly_loss: 0.07        # 7.0% максимальный недельный убыток
+  max_monthly_loss: 0.15       # 15% максимальный месячный убыток
+  
+  # Лимиты позиций
+  max_concurrent_positions: 1   # Максимум 1 позиция одновременно
+  max_position_size: 0.05       # 5% максимальный размер позиции
+  max_leverage: 2               # Максимальное плечо 2x
+  
+  # Стоп-лоссы
+  stop_loss_pct: 0.015          # 1.5% стоп-лосс
+  take_profit_pct: 0.03         # 3% тейк-профит
+  trailing_stop_enabled: true   # Включить трейлинг стоп
+  
+  # Emergency controls
+  emergency_stop_enabled: true   # Включить аварийную остановку
+  emergency_stop_threshold: 0.05 # 5% убыток для аварийной остановки
+  
+  # Временные ограничения
+  max_trades_per_day: 10        # Максимум 10 сделок в день
+  min_trade_interval: 300       # 5 минут между сделками
+  trading_hours_start: "00:00"   # Начало торговых часов
+  trading_hours_end: "23:59"     # Конец торговых часов
+  
+  # Волатильность
+  max_volatility_threshold: 0.05 # 5% максимальная волатильность
+  min_volatility_threshold: 0.001 # 0.1% минимальная волатильность
+  
+  # Маржинальные требования
+  margin_requirement_multiplier: 1.5  # 1.5x от требуемой маржи
+  liquidation_buffer: 0.1             # 10% буфер до ликвидации
+
+position_sizing:
+  # Методы расчета размера позиции
+  method: "kelly"              # kelly, fixed, volatility_adjusted
+  
+  # Kelly Criterion параметры
+  kelly_fraction: 0.25         # Использовать 25% от Kelly
+  min_kelly_fraction: 0.01     # Минимум 1%
+  max_kelly_fraction: 0.05     # Максимум 5%
+  
+  # Volatility adjustment
+  volatility_lookback: 20      # Период для расчета волатильности
+  volatility_target: 0.02      # Целевая волатильность 2%
+  
+  # Fixed size parameters
+  fixed_size_pct: 0.01         # 1% фиксированный размер
+
+risk_metrics:
+  # Метрики для мониторинга
+  var_confidence: 0.05         # 95% VaR
+  var_lookback: 252            # 1 год для VaR
+  sharpe_threshold: 1.0        # Минимальный Sharpe ratio
+  max_drawdown_threshold: 0.15 # 15% максимальная просадка
+  
+  # Алерты
+  alert_on_daily_loss: true
+  alert_on_weekly_loss: true
+  alert_on_drawdown: true
+  alert_on_high_volatility: true
+
+portfolio_limits:
+  # Лимиты портфеля
+  max_portfolio_risk: 0.10     # 10% максимальный риск портфеля
+  max_correlation: 0.7        # Максимальная корреляция между позициями
+  diversification_min: 3      # Минимум 3 различных актива
+  
+  # Ребалансировка
+  rebalance_threshold: 0.05   # 5% отклонение для ребалансировки
+  rebalance_frequency: "weekly" # Еженедельная ребалансировка
+

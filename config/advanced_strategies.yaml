@@ -1,0 +1,57 @@
+# Advanced Trading Strategies Configuration
+
+strategies:
+  # Market Making Strategy
+  market_making:
+    enabled: true
+    spread_target: 0.001  # 0.1% спред
+    inventory_target: 0.0  # Нейтральная позиция
+    max_inventory: 0.1     # Максимальный инвентарь
+    tick_size: 0.01        # Размер тика
+    
+  # Statistical Arbitrage
+  stat_arb:
+    enabled: true
+    pairs: 
+      - ["BTCUSDT", "ETHUSDT"]
+      - ["BTCUSDT", "ADAUSDT"]
+    z_score_threshold: 2.0
+    lookback_period: 20
+    rebalance_frequency: 300  # 5 минут
+    
+  # Mean Reversion
+  mean_reversion:
+    enabled: true
+    lookback_period: 20
+    entry_threshold: 2.0  # Стандартных отклонений
+    exit_threshold: 0.5
+    max_holding_period: 3600  # 1 час
+    
+  # Momentum Strategy
+  momentum:
+    enabled: true
+    lookback_periods: [5, 10, 20]
+    momentum_threshold: 0.02  # 2% движения
+    volume_confirmation: true
+    
+  # Pairs Trading
+  pairs_trading:
+    enabled: true
+    correlation_threshold: 0.7
+    cointegration_test: true
+    hedge_ratio_calculation: "ols"  # ols, kalman
+    
+  # Grid Trading
+  grid_trading:
+    enabled: true
+    grid_levels: 10
+    grid_spacing: 0.005  # 0.5%
+    profit_taking: 0.002  # 0.2%
+    
+  # DCA Strategy
+  dca_strategy:
+    enabled: true
+    dca_intervals: [300, 900, 3600]  # 5min, 15min, 1h
+    dca_amount: 0.01  # 1% от капитала
+    max_dca_levels: 5
+
