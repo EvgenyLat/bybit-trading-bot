@@ -65,8 +65,15 @@ class SecureConfig:
         # Проверяем примеры ключей (не должны быть настоящими)
         test_patterns = [
             'ваш_api_ключ',
+            'your_api_key',
             'test_key',
-            'example_key'
+            'example_key',
+            'demo_key',
+            'fake_key',
+            'placeholder',
+            'PUT_YOUR_KEY_HERE',
+            'your_bybit_api_secret',
+            'ваш_seкретный_ключ'
         ]
         
         for pattern in test_patterns:

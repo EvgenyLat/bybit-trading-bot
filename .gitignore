@@ -70,3 +70,12 @@ cache/
 
 # API keys (для безопасности)
 config/api_keys.yaml
+# SECURITY CRITICAL
+.env*
+*.env
+credentials.env
+security_report.txt
+security_*.json
+bot_state.json
+positions.json
+trades.json

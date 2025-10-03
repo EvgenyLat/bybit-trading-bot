@@ -1,0 +1,14 @@
+# Basic Safety Configuration
+emergency_stop:
+  enabled: true
+  max_daily_loss: 3%
+  max_position_size: 5%
+
+api_security:
+  timeout_seconds: 30
+  retry_attempts: 3
+  rate_limit_delay: 1
+
+logging:
+  omit_secrets: true
+  log_level: INFO

@@ -1,0 +1,101 @@
+# Environment files
+.env
+.env.local
+.env.production
+.env.staging
+.env.test
+*.env
+secrets.env
+credentials.env
+
+# API Keys and Secrets
+config/secrets.env
+config/credentials.yaml
+config/keys.json
+**/secrets/**
+**/credentials/**
+**/keys/**
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+database/
+db/
+
+# Logs
+*.log
+logs/
+log/
+*.log.*
+
+# Cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+*.cache
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Test files with secrets
+tests/data/secrets/
+tests/fixtures/keys/
+**/test_credentials.*
+
+# Output files
+output/
+results/
+backtest_results/
+**/out/
+
+# Compiled Python
+*.egg-info/
+dist/
+build/
+
+# Jupyter notebooks checkpoints
+.ipynb_checkpoints/
+
+# Trading data
+data/historical/
+data/real-time/
+*.csv
+*.parquet
+
+# ML models (large files)
+models/
+*.model
+*.pkl
+*.joblib
+
+# Trading state
+bot_state.json
+positions.json
+trades.json
+
+# Security reports
+security_report.txt
+security_*.json
+scan_report.*
+
+# Backup files
+*.backup
+*.bak

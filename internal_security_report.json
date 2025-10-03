@@ -1,0 +1,38 @@
+{
+  "scan_timestamp": "C:\\Users\\evgla\\OneDrive\\Рабочий стол\\traiding-bot",
+  "results": {
+    "bandit": {
+      "status": "not_found",
+      "output": "bandit not found in PATH"
+    },
+    "pip_audit": {
+      "status": "not_found",
+      "output": "pip_audit not found in PATH"
+    },
+    "safety": {
+      "status": "not_found",
+      "output": "safety not found in PATH"
+    },
+    "ruff": {
+      "status": "skipped",
+      "details": "PATH issues"
+    },
+    "black": {
+      "status": "skipped",
+      "details": "PATH issues"
+    },
+    "mypy": {
+      "status": "skipped",
+      "details": "PATH issues"
+    },
+    "manual_checks": {
+      "status": "completed",
+      "issues": []
+    }
+  },
+  "summary": {
+    "manual_issues_count": 0,
+    "tools_completed": 1,
+    "total_tools": 6
+  }
+}
