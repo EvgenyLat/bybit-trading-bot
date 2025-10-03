@@ -24,8 +24,7 @@ keyring==25.4.0
 # Retry and error handling
 tenacity==8.3.0
 
-# Decimal precision
-decimal-python==1.70
+# Note: Decimal is built into Python standard library
 
 # ML/AI (optional, secure versions)
 scikit-learn==1.4.2
