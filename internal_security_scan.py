@@ -5,12 +5,10 @@
 Выполнение security проверок изнутри Python для обхода PATH проблем
 """
 
-import os
-import sys
 import subprocess
 import json
 from pathlib import Path
-from typing import Dict, Any, List
+from typing import List
 
 class InternalSecurityScanner:
     """🔒 Внутренний сканер безопасности"""
@@ -223,10 +221,10 @@ class InternalSecurityScanner:
             for issue in manual_issues:
                 report.append(f"   • {issue}")
         else:
-            report.append(f"\n✅ MANUAL CHECKS: NO ISSUES FOUND")
+            report.append("\n✅ MANUAL CHECKS: NO ISSUES FOUND")
             
         # Tool status
-        report.append(f"\n📊 SECURITY TOOL STATUS:")
+        report.append("\n📊 SECURITY TOOL STATUS:")
         for tool, result in self.results.items():
             if tool != 'manual_checks':
                 status_symbol = {
@@ -244,19 +242,19 @@ class InternalSecurityScanner:
                              if isinstance(r, dict) and r.get('status') == 'completed')
         total_tools = len([k for k in self.results.keys() if k != 'manual_checks'])
         
-        report.append(f"\n📊 SUMMARY:")
+        report.append("\n📊 SUMMARY:")
         report.append(f"   🛠️ Tools completed: {completed_tools}/{total_tools}")
         report.append(f"   🔍 Manual issues: {len(manual_issues)}")
         
         if len(manual_issues) == 0 and completed_tools > 0:
-            report.append(f"   ✅ Overall Status: SECURE")
+            report.append("   ✅ Overall Status: SECURE")
         elif len(manual_issues) <= 2:
-            report.append(f"   ⚠️ Overall Status: MOSTLY SECURE")
+            report.append("   ⚠️ Overall Status: MOSTLY SECURE")
         else:
-            report.append(f"   🚨 Overall Status: NEEDS ATTENTION")
+            report.append("   🚨 Overall Status: NEEDS ATTENTION")
             
         # Recommendations
-        report.append(f"\n🔧 RECOMMENDATIONS:")
+        report.append("\n🔧 RECOMMENDATIONS:")
         
         if len(manual_issues) > 0:
             report.append(f"   1. Fix manual check issues")

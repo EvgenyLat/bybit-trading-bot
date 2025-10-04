@@ -26,8 +26,8 @@ class TestSecurityManager(unittest.TestCase):
     
     def setUp(self):
         self.security_manager = SecurityManager("test_password")
-        self.test_api_key = "test_api_key_123"
-        self.test_api_secret = "test_api_secret_456"
+        self.test_api_key = "test_key_" + "x" * 20
+        self.test_api_secret = "test_secret_" + "y" * 30
     
     def test_encrypt_decrypt_api_key(self):
         """Test API key encryption and decryption"""

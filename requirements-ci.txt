@@ -16,6 +16,9 @@ ta>=0.10.0
 # Security & Configuration
 python-dotenv>=1.0.0
 
+# Retry Logic & Error Handling
+tenacity>=8.0.0
+
 # Testing (for CI)
 pytest>=7.0.0
 pytest-asyncio>=0.21.0
@@ -33,4 +36,4 @@ pip-audit>=2.6.0
 safety>=2.3.0
 
 # Decimal precision (built into Python)
-# tenacity>=8.0.0  # For retry logic
+# Все финансовые расчеты используют Decimal
