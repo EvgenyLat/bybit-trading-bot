@@ -1,10 +1,11 @@
 # Bybit Trading Bot Configuration
 
 # Bybit API Configuration
+# ⚠️ ВАЖНО: API ключи загружаются из переменных окружения (.env файл)
+# НИКОГДА не храните реальные ключи в этом файле!
 api:
   exchange: "bybit"
-  api_key: "your_bybit_api_key_here"
-  api_secret: "your_bybit_api_secret_here"
+  # api_key и api_secret загружаются из .env файла через SecureConfig
   testnet: true  # Use Bybit testnet for development
   base_url: "https://api-testnet.bybit.com"  # Testnet URL
   # base_url: "https://api.bybit.com"  # Mainnet URL
@@ -16,7 +17,7 @@ trading:
   timeframe: "1"     # 1, 3, 5, 15, 30, 60, 120, 240, 360, 720, D, W, M
   position_size: 0.02  # 2% of portfolio per trade
   max_positions: 2    # Maximum number of concurrent positions
-  leverage: 10         # Leverage for futures trading
+  leverage: 2          # SAFE leverage for futures trading (max 2x for beginners)
   margin_mode: "isolated"  # isolated or cross
 
 # Risk Management
@@ -109,7 +110,7 @@ backtesting:
   end_date: "2024-01-01"
   initial_capital: 10000
   commission: 0.001  # 0.1% commission
-  slippage: 0.0005  # 0.05% slippage
+  slippage: 0.002   # 0.2% realistic slippage for crypto futures
 
 # Logging
 logging:
