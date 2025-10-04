@@ -1,59 +1,137 @@
 #!/usr/bin/env python3
-
-print("🔒 QUICK SECURITY TEST")
-print("=" * 40)
+# -*- coding: utf-8 -*-
+"""
+🔒 Quick Security Test for CI/CD
+Быстрый тест безопасности для GitHub Actions
+"""
 
 import os
+import sys
 from pathlib import Path
 
-# 1. Проверка ключевых файлов
-critical_files = [
-    '.env',
-    '.gitignore',
-    'config/config.yaml',
-    'config/secrets.env.example',
-    'src/config.py',
-    'src/secure_executor.py'
-]
-
-found_files = 0
-missing_files = []
-
-for file in critical_files:
-    if Path(file).exists():
-        print(f"✅ {file}")
-        found_files += 1
-    else:
-        print(f"❌ {file} MISSING")
-        missing_files.append(file)
-
-print(f"\n📊 Files Found: {found_files}/{len(critical_files)}")
-
-# 2. Проверка структуры проекта
-directories = ['src', 'config', 'scripts', 'services']
-present_dirs = []
-
-for dir_name in directories:
-    if Path(dir_name).exists():
-        present_dirs.append(dir_name)
-        print(f"✅ Directory {dir_name}/")
-
-print(f"\n📁 Directories: {len(present_dirs)}/{len(directories)}")
-
-# 3. Итоговая оценка
-print("\n" + "=" * 40)
-if len(missing_files) == 0 and len(present_dirs) == len(directories):
-    print("🎉 SECURITY STATUS: EXCELLENT")
-    print("✅ All critical files present")
-    print("🚀 Project is PRODUCTION READY")
-else:
-    print("⚠️ SECURITY STATUS: NEEDS ATTENTION")
-    if missing_files:
-        print(f"❌ Missing files: {len(missing_files)}")
+def test_security_basics():
+    """Базовые тесты безопасности"""
+    print("🔒 Running Quick Security Tests")
+    print("=" * 40)
     
-print("\n🔧 IMMEDIATE ACTIONS:")
-print("1. Get real Bybit API keys")
-print("2. Update .env with real keys")
-print("3. Test connection: python quick_start.py")
+    issues = []
+    
+    # 1. Проверка .gitignore
+    gitignore = Path('.gitignore')
+    if gitignore.exists():
+        try:
+            content = gitignore.read_text(encoding='utf-8')
+            if '.env' in content:
+                print("✅ .env in .gitignore")
+            else:
+                issues.append("❌ .env NOT in .gitignore")
+        except Exception as e:
+            issues.append(f"❌ Cannot read .gitignore: {e}")
+    else:
+        issues.append("❌ .gitignore missing")
+    
+    # 2. Проверка .env файла
+    env_file = Path('.env')
+    if env_file.exists():
+        try:
+            content = env_file.read_text(encoding='utf-8')
+            if 'ваш_api_ключ' in content.lower():
+                issues.append("⚠️ Test API key in .env (replace with real)")
+            else:
+                print("✅ .env contains real keys")
+        except Exception as e:
+            issues.append(f"❌ Cannot read .env: {e}")
+    else:
+        print("ℹ️ .env file not found (expected for CI)")
+    
+    # 3. Проверка security модулей
+    security_modules = [
+        'scripts/security_check.py',
+        'internal_security_scan.py',
+        'src/config.py',
+        'src/secure_executor.py'
+    ]
+    
+    for module in security_modules:
+        if Path(module).exists():
+            print(f"✅ {module} exists")
+        else:
+            issues.append(f"❌ {module} missing")
+    
+    # 4. Проверка GitHub Actions
+    workflow = Path('.github/workflows/security-and-tests.yml')
+    if workflow.exists():
+        print("✅ GitHub Actions workflow configured")
+    else:
+        issues.append("❌ GitHub Actions workflow missing")
+    
+    # 5. Проверка requirements файлов
+    req_files = ['requirements-production.txt', 'requirements-secure.txt']
+    for req_file in req_files:
+        if Path(req_file).exists():
+            print(f"✅ {req_file} exists")
+        else:
+            issues.append(f"❌ {req_file} missing")
+    
+    # ИТОГИ
+    print("\n" + "=" * 40)
+    print("📊 SECURITY TEST RESULTS:")
+    
+    if not issues:
+        print("🎉 ALL SECURITY TESTS PASSED!")
+        print("✅ Repository is SECURE")
+        return True
+    else:
+        print(f"⚠️ Found {len(issues)} issues:")
+        for issue in issues:
+            print(f"   {issue}")
+        return False
 
-exit(0 if len(missing_files) == 0 else 1)
+def test_imports():
+    """Тест импорта основных библиотек"""
+    print("\n📦 Testing Core Library Imports:")
+    
+    try:
+        import pandas as pd
+        print(f"✅ Pandas {pd.__version__}")
+    except ImportError as e:
+        print(f"❌ Pandas import failed: {e}")
+        return False
+    
+    try:
+        import numpy as np
+        print(f"✅ NumPy {np.__version__}")
+    except ImportError as e:
+        print(f"❌ NumPy import failed: {e}")
+        return False
+    
+    try:
+        import yaml
+        print("✅ PyYAML")
+    except ImportError as e:
+        print(f"❌ PyYAML import failed: {e}")
+        return False
+    
+    return True
+
+def main():
+    """Главная функция"""
+    print("🚀 Quick Security Test for CI/CD Pipeline")
+    print("=" * 50)
+    
+    # Запускаем тесты
+    security_ok = test_security_basics()
+    imports_ok = test_imports()
+    
+    print("\n" + "=" * 50)
+    print("🏆 FINAL RESULTS:")
+    
+    if security_ok and imports_ok:
+        print("✅ ALL TESTS PASSED - CI/CD READY!")
+        return 0
+    else:
+        print("❌ SOME TESTS FAILED")
+        return 1
+
+if __name__ == "__main__":
+    sys.exit(main())

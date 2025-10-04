@@ -1,0 +1,36 @@
+# 🚀 Production Requirements for CI/CD
+# Минимальный набор зависимостей для прохождения тестов
+
+# Core Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+PyYAML>=6.0
+
+# Trading APIs
+pybit>=5.0.0
+requests>=2.28.0
+
+# Technical Analysis
+ta>=0.10.0
+
+# Security & Configuration
+python-dotenv>=1.0.0
+
+# Testing (for CI)
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+pytest-mock>=3.10.0
+pytest-cov>=4.0.0
+
+# Code Quality (for CI)
+black>=23.0.0
+ruff>=0.1.0
+mypy>=1.0.0
+
+# Security Tools (for CI)
+bandit>=1.7.0
+pip-audit>=2.6.0
+safety>=2.3.0
+
+# Decimal precision (built into Python)
+# tenacity>=8.0.0  # For retry logic
